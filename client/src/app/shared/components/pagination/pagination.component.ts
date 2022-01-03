@@ -13,6 +13,8 @@ export class PaginationComponent implements OnInit {
   @Input() indexes: number[];
 
   @Output() pageChanged = new EventEmitter<number>();
+  @Output() goToFirstPage = new EventEmitter<number>();
+  @Output() goToLastPage = new EventEmitter<number>();
 
   constructor() { }
 
@@ -21,6 +23,15 @@ export class PaginationComponent implements OnInit {
 
   onPaginationChanged(index: number) {
     this.pageChanged.emit(index);
+    console.log(this.pageNumber);
+  }
+
+  onGoToFirstPage() {
+    this.goToFirstPage.emit();
+  }
+
+  onGoToLastPage() {
+    this.goToLastPage.emit();
   }
 
 }

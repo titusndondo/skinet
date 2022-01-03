@@ -13,6 +13,7 @@ import { ShopParams } from '../shared/models/shopParams';
 export class ShopComponent implements OnInit {
 
   @ViewChild('search') searchTerm: ElementRef;
+  @ViewChild('select') select: ElementRef;
 
   products: IProduct[];
   brands: IBrand[];
@@ -21,7 +22,7 @@ export class ShopComponent implements OnInit {
   sortOptions = [
     { name: 'Alphabetical', value: 'name' },
     { name: 'Price: Low to High', value: 'priceAsc' },
-    { name: 'Price: High to Low', value: 'priceDesc'}
+    { name: 'Price: High to Low', value: 'priceDesc' }
   ]
 
   totalCount: number;
@@ -92,6 +93,16 @@ export class ShopComponent implements OnInit {
     this.getProducts();
   }
 
+  onGoToFirstPage() {
+    this.shopParams.pageNumber = 1;
+    this.onPageChanged(1);
+  }
+
+  onGoToLastPage() {
+    this.shopParams.pageNumber = this.numberOfPages;
+    this.onPageChanged(this.numberOfPages);
+  }
+
   onSearch() {
     this.shopParams.search = this.searchTerm.nativeElement.value;
     this.getProducts();
@@ -100,6 +111,7 @@ export class ShopComponent implements OnInit {
   onReset() {
     this.searchTerm.nativeElement.value = '';
     this.shopParams = new ShopParams();
+    this.select.nativeElement.value = this.shopParams.sort;
     this.getProducts();
   }
 

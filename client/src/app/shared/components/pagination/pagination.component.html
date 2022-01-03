@@ -1,11 +1,11 @@
 <nav aria-label="..." *ngIf="this.totalCount > 0">
   <ul class="pagination">
-    <li class="page-item" [ngClass]="{'disabled': this.pageNumber === 1}">
+    <li class="page-item" [ngClass]="{'disabled': this.pageNumber === 1}" (click)="onGoToFirstPage()">
       <a class="page-link" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li class="page-item" [ngClass]="{'disabled': this.pageNumber === 1}">
+    <li class="page-item" [ngClass]="{'disabled': this.pageNumber === 1}" (click)="onPaginationChanged(this.pageNumber > 1 ? this.pageNumber - 1 : 1)">
       <a class="page-link">&lsaquo;</a>
     </li>
 
@@ -16,10 +16,10 @@
       <a class="page-link"> {{ index }}</a>
     </li>
 
-    <li class="page-item" [ngClass]="{'disabled': this.pageNumber === numberOfPages}">
+    <li class="page-item" [ngClass]="{'disabled': this.pageNumber === numberOfPages}" (click)="onPaginationChanged(this.pageNumber < numberOfPages ? this.pageNumber + 1 : numberOfPages)">
       <a class="page-link">&rsaquo;</a>
     </li>
-    <li class="page-item" [ngClass]="{'disabled': this.pageNumber === numberOfPages}">
+    <li class="page-item" [ngClass]="{'disabled': this.pageNumber === numberOfPages}" (click)="onGoToLastPage()">
       <a class="page-link">
         <span aria-hidden="true">&raquo;</span>
       </a>
